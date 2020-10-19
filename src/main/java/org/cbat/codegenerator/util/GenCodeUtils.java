@@ -36,6 +36,8 @@ public class GenCodeUtils {
         templates.add("template/Service.java.vm");
         templates.add("template/Controller.java.vm");
         templates.add("template/Dao.java.vm");
+        templates.add("template/AppService.java.vm");
+        templates.add("template/AppServiceImpl.java.vm");
         return templates;
     }
 
@@ -92,7 +94,8 @@ public class GenCodeUtils {
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"))));
+                String name = getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"));
+                zip.putNextEntry(new ZipEntry(name));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
@@ -159,11 +162,11 @@ public class GenCodeUtils {
             return packagePath + "dao" + File.separator + className + "Dao.java";
         }
 
-        if (template.contains("Service.java.vm")) {
+        if (template.contains("Service.java.vm")&&!template.contains("App")) {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-        if (template.contains("ServiceImpl.java.vm")) {
+        if (template.contains("ServiceImpl.java.vm")&&!template.contains("App")) {
             return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 
