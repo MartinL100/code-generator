@@ -1,0 +1,30 @@
+package ${package}.${moduleName}.dto;
+
+import com.seeyon.boot.annotation.AppService;
+import com.seeyon.boot.transport.BaseDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import javax.validation.constraints.NotNull;
+
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Getter
+@Setter
+@ApiModel(description = "${comments}信息")
+public class ${className}Dto extends BaseDto {
+	private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+
+@ApiModelProperty(value = "$column.comments")
+private $column.attrType $column.attrname;
+#end
+
+}
