@@ -1,0 +1,56 @@
+package ${package}.${moduleName}.api;
+
+import ${package}.${moduleName}.dto.${className}Dto;
+
+import com.seeyon.boot.transport.ListResponse;
+import com.seeyon.boot.transport.PageRequest;
+import com.seeyon.boot.transport.PageResponse;
+import com.seeyon.boot.transport.SingleRequest;
+import com.seeyon.boot.transport.SingleResponse;
+
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}AppService {
+
+    /**
+   * 创建${comments}
+   * @param request ${comments}
+   * @return ${comments}Id
+   */
+    SingleResponse<Long> create(SingleRequest<BpmPermissionOperationDto> request);
+
+    /**
+     * 分页查询${comments}
+     * @param request 参考${comments}Dto
+     * @return ${comments}Dto集合
+     */
+    PageResponse<BpmPermissionOperationDto> findByCondition(PageRequest request);
+
+    /**
+     * 根据ID查询${comments}
+     * @param request ${comments}id
+     * @return ${comments}Dto
+     */
+    SingleResponse<BpmPermissionOperationDto>selectById(SingleRequest<Long> request);
+
+    /**
+     * 根据id删除${comments}
+     * @param request ${comments}id
+     * @return 删除数量
+     */
+    SingleResponse<Integer>deleteById(SingleRequest<Long> request);
+
+    /**
+     * 修改${comments}
+     * @param request ${comments}Dto
+     * @return 修改数量
+     */
+    SingleResponse<Integer>update(SingleRequest<BpmPermissionOperationDto> request);
+}
+

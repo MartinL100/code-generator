@@ -1,0 +1,60 @@
+package ${package}.${moduleName}.appservice;
+
+import com.seeyon.boot.annotation.AppService;
+import com.seeyon.boot.transport.PageRequest;
+import com.seeyon.boot.transport.PageResponse;
+import com.seeyon.boot.transport.SingleRequest;
+import com.seeyon.boot.transport.SingleResponse;
+import com.seeyon.bpm.api.${className}AppService;
+import com.seeyon.bpm.domain.service.${className}Service;
+import com.seeyon.bpm.dto.${className}Dto;
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@AppService
+@Transactional
+@Slf4j
+@DubboService
+@Api(tags = "${comments}对外接口")
+public class ${className}AppService {
+
+    @Autowired
+        ${className}Service ${classname}Service;
+
+    @Override
+    public SingleResponse<Long> create(SingleRequest<${className}Dto> request) {
+        return SingleResponse.from(${classname}Service.create(request.getData()));
+    }
+    @Transactional(readOnly = true)
+    @Override
+    public PageResponse<${className}Dto> findByCondition(PageRequest request) {
+        return PageResponse.from(${classname}Service.selectDetailPageByCondition(request.getPageInfo(), request.getParams(), request.getSort()));
+    }
+    @Transactional(readOnly = true)
+    @Override
+    public SingleResponse<${className}Dto> selectById(SingleRequest<Long> request) {
+        return SingleResponse.from(${classname}Service.selectById(request.getData()));
+    }
+    @Override
+    public SingleResponse<Integer> deleteById(SingleRequest<Long> request) {
+        return SingleResponse.from(${classname}Service.deleteById(request.getData()));
+    }
+
+    @AppService.ValidationGroup(value = AppService.ValidationGroup.Update.class)
+    @Override
+    public SingleResponse<Integer> update(SingleRequest<${className}Dto> request) {
+        return SingleResponse.from(${classname}Service.update(request.getData()));
+    }
+
+}
+

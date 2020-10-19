@@ -1,0 +1,14 @@
+package ${package}.${moduleName}.domian.dao;
+
+import ${package}.${moduleName}.domian.entity.${className};
+import com.seeyon.boot.starter.mybatis.BaseMybatisDao;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Dao extends BaseMybatisDao<${className}> {
+	
+}

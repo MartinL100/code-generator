@@ -1,0 +1,86 @@
+package ${package}.${moduleName}.domain.service;
+
+
+
+import ${package}.${moduleName}.domain.entity.${className};
+import ${package}.${moduleName}.domain.dao.${className}Dao;
+import ${package}.${moduleName}.dto.${className}Dto;
+
+import com.seeyon.boot.transport.PageData;
+import com.seeyon.boot.transport.PageInfo;
+import com.seeyon.boot.transport.Sort;
+import com.seeyon.boot.util.Asserts;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+@Slf4j
+public class ${className}Service {
+
+    @Autowired
+    ${className}Dao ${classname}Dao;
+
+   /**
+    * 创建${comments}
+    * @param dto dto对象
+    * @return id
+    */
+    public Long create(${className}Dto dto){
+        ${className} entity = new ${className}();
+        entity.from(dto);
+            ${classname}Dao.create(entity);
+        return entity.getId();
+    }
+
+       /**
+        * 根据condition查询
+        * @param pageInfo
+        * @param columnMap
+        * @param sort
+        * @return
+        */
+    public PageData<${className}Dto> selectByCondition(PageInfo pageInfo, Map<String, Object> columnMap, Sort sort){
+        PageData<${className}> pageData = ${classname}Dao.selectPageByCondition(pageInfo, columnMap, sort);
+        return pageData.to(${className}Dto.class);
+    }
+
+        /**
+         * 根据id查询
+         * @param id
+         * @return
+         */
+    public ${className}Dto selectById(@NotNull Long id){
+        ${className} entity = ${classname}Dao.selectById(id);
+        return null == entity?null: entity.to(${className}Dto.class);
+    }
+
+      /**
+       * 根据id删除
+       * @param id
+       * @return
+       */
+    public Integer deleteById(@NotNull Long id){
+        return ${classname}Dao.deleteById(id);
+    }
+
+        /**
+         * 修改
+         * @param dto
+         * @return
+         */
+    public Integer update(${className}Dto dto){
+        ${className} entity = ${className}Dao.selectById(dto.getId());
+        entity.from(dto);
+        return ${classname}Dao.update(entity);
+    }
+}
+
