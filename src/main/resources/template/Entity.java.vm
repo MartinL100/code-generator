@@ -29,11 +29,11 @@ public class ${className} extends BaseEntity {
 	/**
 	 * $column.comments
 	 */
-##	#if($column.columnName == $pk.columnName)
-##@TableId
-##	#end
-@Column(name = "${column.columnName}", columnDefinition = "${column.dataType} COMMENT '${column.comments}'")
-private $column.attrType $column.attrname;
-#end
+	##	#if($column.columnName == $pk.columnName)
+	##@TableId
+	##	#end
+	@Column(name = "${column.columnName}", columnDefinition = "${column.dataType} COMMENT '${column.comments}'")
+	private $column.attrType $column.attrname;
+	#end
 
 }

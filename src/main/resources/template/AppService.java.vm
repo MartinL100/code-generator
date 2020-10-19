@@ -18,10 +18,10 @@ import com.seeyon.boot.transport.SingleResponse;
 public interface ${className}AppService {
 
     /**
-   * 创建${comments}
-   * @param request ${comments}
-   * @return ${comments}Id
-   */
+     * 创建${comments}
+     * @param request ${comments}
+     * @return ${comments}Id
+     */
     SingleResponse<Long> create(SingleRequest<${className}Dto> request);
 
     /**

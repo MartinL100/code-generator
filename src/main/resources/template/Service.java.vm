@@ -31,11 +31,11 @@ public class ${className}Service {
     @Autowired
     ${className}Dao ${classname}Dao;
 
-   /**
-    * 创建${comments}
-    * @param dto dto对象
-    * @return id
-    */
+    /**
+     * 创建${comments}
+     * @param dto dto对象
+     * @return id
+     */
     public Long create(${className}Dto dto){
         ${className} entity = new ${className}();
         entity.from(dto);
