@@ -38,18 +38,18 @@ public class ExcelToClass {
         private static List<ColumnEntity> cols = new ArrayList<>();
         private static TableEntity table = new TableEntity();
         public static void main(String[] args) throws IOException {
-            FileOutputStream file = new FileOutputStream("C:\\Users\\martingcong\\Desktop\\temp\\class.zip");
+            //控制输出路径
+            FileOutputStream file = new FileOutputStream(getConfig().getString("targetpath"));
             ZipOutputStream zip = new ZipOutputStream(file);
-
-            GenCodeUtils.generatorCode(excelToTableEntity(),zip);
+            //获取excle文件
+            FileInputStream fis = new FileInputStream(
+                    new File(getConfig().getString("sourcepath")));
+            GenCodeUtils.generatorCode(excelToTableEntity(fis),zip);
         }
 
 
-    public static TableEntity excelToTableEntity() throws IOException {
+    public static TableEntity excelToTableEntity(FileInputStream fis) throws IOException {
         Configuration config = getConfig();
-        //获取excle文件
-        FileInputStream fis = new FileInputStream(
-                new File("D:\\data\\temp\\data.xlsx"));
         //获取excle对象 XSSF支持 xlsx
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         //获取第一个工作薄
