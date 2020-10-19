@@ -2,7 +2,6 @@ package ${package}.${moduleName}.api;
 
 import ${package}.${moduleName}.dto.${className}Dto;
 
-import com.seeyon.boot.transport.ListResponse;
 import com.seeyon.boot.transport.PageRequest;
 import com.seeyon.boot.transport.PageResponse;
 import com.seeyon.boot.transport.SingleRequest;

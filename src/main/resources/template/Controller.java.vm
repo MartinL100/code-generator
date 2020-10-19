@@ -43,7 +43,7 @@ public class ${className}Controller {
 
     @ApiOperation(value = "创建${comments}" , notes = "创建${comments}")
     @PostMapping("${class_name}/create")
-    public SingleResponse<Long> create(@RequestBody ${classname}Dto dto){
+    public SingleResponse<Long> create(@RequestBody ${className}Dto dto){
         return ${classname}AppService.create(SingleRequest.from(dto));
     }
 
@@ -51,14 +51,14 @@ public class ${className}Controller {
     @ApiOperation(value = "根据条件查询${comments}" , notes = "根据条件查询${comments}")
     @PostMapping("${class_name}/search")
     @ApiMapParameter(name = "params", dtoName = "${className}Dto")
-    public PageResponse<${classname}Dto> search(@MultiRequestBody PageInfo pageInfo, @MultiRequestBody Map<String, Object> params, @MultiRequestBody Sort sort){
+    public PageResponse<${className}Dto> search(@MultiRequestBody PageInfo pageInfo, @MultiRequestBody Map<String, Object> params, @MultiRequestBody Sort sort){
         return ${classname}AppService.selectPageByCondition(PageRequest.from(pageInfo, params, sort));
     }
 
 
     @ApiOperation(value = "获取${comments}详情")
     @GetMapping("${class_name}/{id}")
-    public SingleResponse<${classname}Dto> selectById(@PathVariable("id") @ApiParam(value = "${class_name}id") Long id) {
+    public SingleResponse<${className}Dto> selectById(@PathVariable("id") @ApiParam(value = "${comments}id") Long id) {
         return ${classname}AppService.selectById(SingleRequest.from(id));
     }
 
@@ -70,7 +70,7 @@ public class ${className}Controller {
 
     @ApiOperation(value = "修改${comments}" , notes = "修改${comments}")
     @PostMapping("${class_name}/update")
-    public SingleResponse<Integer> update(@RequestBody ${classname}Dto dto){
+    public SingleResponse<Integer> update(@RequestBody ${className}Dto dto){
         return ${classname}AppService.update(SingleRequest.from(dto));
     }
 
