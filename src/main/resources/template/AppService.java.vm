@@ -23,21 +23,21 @@ public interface ${className}AppService {
    * @param request ${comments}
    * @return ${comments}Id
    */
-    SingleResponse<Long> create(SingleRequest<BpmPermissionOperationDto> request);
+    SingleResponse<Long> create(SingleRequest<${className}Dto> request);
 
     /**
      * 分页查询${comments}
      * @param request 参考${comments}Dto
      * @return ${comments}Dto集合
      */
-    PageResponse<BpmPermissionOperationDto> findByCondition(PageRequest request);
+    PageResponse<${className}Dto> selectPageByCondition(PageRequest request);
 
     /**
      * 根据ID查询${comments}
      * @param request ${comments}id
      * @return ${comments}Dto
      */
-    SingleResponse<BpmPermissionOperationDto>selectById(SingleRequest<Long> request);
+    SingleResponse<${className}Dto>selectById(SingleRequest<Long> request);
 
     /**
      * 根据id删除${comments}
@@ -51,6 +51,6 @@ public interface ${className}AppService {
      * @param request ${comments}Dto
      * @return 修改数量
      */
-    SingleResponse<Integer>update(SingleRequest<BpmPermissionOperationDto> request);
+    SingleResponse<Integer>update(SingleRequest<${className}Dto> request);
 }
 

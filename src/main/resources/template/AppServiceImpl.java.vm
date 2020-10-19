@@ -5,9 +5,9 @@ import com.seeyon.boot.transport.PageRequest;
 import com.seeyon.boot.transport.PageResponse;
 import com.seeyon.boot.transport.SingleRequest;
 import com.seeyon.boot.transport.SingleResponse;
-import com.seeyon.bpm.api.${className}AppService;
-import com.seeyon.bpm.domain.service.${className}Service;
-import com.seeyon.bpm.dto.${className}Dto;
+import com.seeyon.${moduleName}.api.${className}AppService;
+import com.seeyon.${moduleName}.domain.service.${className}Service;
+import com.seeyon.${moduleName}.dto.${className}Dto;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @DubboService
 @Api(tags = "${comments}对外接口")
-public class ${className}AppService {
+public class ${className}AppServiceImpl implements ${className}AppService{
 
     @Autowired
         ${className}Service ${classname}Service;
@@ -37,8 +37,8 @@ public class ${className}AppService {
     }
     @Transactional(readOnly = true)
     @Override
-    public PageResponse<${className}Dto> findByCondition(PageRequest request) {
-        return PageResponse.from(${classname}Service.selectDetailPageByCondition(request.getPageInfo(), request.getParams(), request.getSort()));
+    public PageResponse<${className}Dto> selectPageByCondition(PageRequest request) {
+        return PageResponse.from(${classname}Service.selectPageByCondition(request.getPageInfo(), request.getParams(), request.getSort()));
     }
     @Transactional(readOnly = true)
     @Override

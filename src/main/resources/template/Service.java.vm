@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+import javax.validation.constraints.NotNull;
 
 /**
  * ${comments}
@@ -37,7 +39,7 @@ public class ${className}Service {
     public Long create(${className}Dto dto){
         ${className} entity = new ${className}();
         entity.from(dto);
-            ${classname}Dao.create(entity);
+        ${classname}Dao.create(entity);
         return entity.getId();
     }
 
@@ -48,7 +50,7 @@ public class ${className}Service {
         * @param sort
         * @return
         */
-    public PageData<${className}Dto> selectByCondition(PageInfo pageInfo, Map<String, Object> columnMap, Sort sort){
+    public PageData<${className}Dto> selectPageByCondition(PageInfo pageInfo, Map<String, Object> columnMap, Sort sort){
         PageData<${className}> pageData = ${classname}Dao.selectPageByCondition(pageInfo, columnMap, sort);
         return pageData.to(${className}Dto.class);
     }
@@ -78,7 +80,7 @@ public class ${className}Service {
          * @return
          */
     public Integer update(${className}Dto dto){
-        ${className} entity = ${className}Dao.selectById(dto.getId());
+        ${className} entity = ${classname}Dao.selectById(dto.getId());
         entity.from(dto);
         return ${classname}Dao.update(entity);
     }

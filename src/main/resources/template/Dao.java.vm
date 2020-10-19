@@ -1,6 +1,6 @@
 package ${package}.${moduleName}.domian.dao;
 
-import ${package}.${moduleName}.domian.entity.${className};
+import ${package}.${moduleName}.domain.entity.${className};
 import com.seeyon.boot.starter.mybatis.BaseMybatisDao;
 
 /**
