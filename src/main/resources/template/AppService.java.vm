@@ -29,7 +29,7 @@ public interface ${className}AppService {
      * @param request 参考${comments}Dto
      * @return ${comments}Dto集合
      */
-    PageResponse<${className}Dto> selectPageByCondition(PageRequest request);
+    PageResponse<${className}Dto> selectPageByConditions(PageRequest request);
 
     /**
      * 根据ID查询${comments}

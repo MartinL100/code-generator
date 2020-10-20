@@ -150,6 +150,7 @@ public class GenCodeUtils {
      */
     public static String getFileName(String template, String className, String packageName, String moduleName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
+        String testPackagePath = "test" + File.separator + "java" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator + moduleName + File.separator;
         }
@@ -207,7 +208,7 @@ public class GenCodeUtils {
         }
 
         if(template.contains("AppServiceTest.java.vm")){
-            return packagePath + className + "AppServiceTest.java";
+            return testPackagePath + "appservice" + File.separator + className + "AppServiceTest.java";
         }
 
 

@@ -168,7 +168,7 @@ public class  ${className}AppServiceTest  extends AppTestBase {
      * @date ${datetime}
      */
     @Test
-    public void testSelectPageByCondition() {
+    public void testselectPageByConditions() {
         PageInfo pageInfo = new PageInfo();
         pageInfo.setPageSize(5);
 
@@ -177,7 +177,7 @@ public class  ${className}AppServiceTest  extends AppTestBase {
 
         PageRequest request = PageRequest.from(pageInfo, map);
 
-        PageResponse<${className}Dto> selResp = appService.selectPageByCondition(request);
+        PageResponse<${className}Dto> selResp = appService.selectPageByConditions(request);
 
         Assert.assertTrue(selResp.getData().getContent() != null);
 

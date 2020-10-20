@@ -50,8 +50,8 @@ public class ${className}Service {
         * @param sort
         * @return
         */
-    public PageData<${className}Dto> selectPageByCondition(PageInfo pageInfo, Map<String, Object> columnMap, Sort sort){
-        PageData<${className}> pageData = ${classname}Dao.selectPageByCondition(pageInfo, columnMap, sort);
+    public PageData<${className}Dto> selectPageByConditions(PageInfo pageInfo, Map<String, Object> columnMap, Sort sort){
+        PageData<${className}> pageData = ${classname}Dao.selectPageByConditions(pageInfo, columnMap, sort);
         return pageData.to(${className}Dto.class);
     }
 

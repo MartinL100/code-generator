@@ -52,7 +52,7 @@ public class ${className}Controller {
     @PostMapping("${class_name}/search")
     @ApiMapParameter(name = "params", dtoName = "${className}Dto")
     public PageResponse<${className}Dto> search(@MultiRequestBody PageInfo pageInfo, @MultiRequestBody Map<String, Object> params, @MultiRequestBody Sort sort){
-        return ${classname}AppService.selectPageByCondition(PageRequest.from(pageInfo, params, sort));
+        return ${classname}AppService.selectPageByConditions(PageRequest.from(pageInfo, params, sort));
     }
 
 
