@@ -1,7 +1,6 @@
 package org.cbat.codegenerator.service;
 
-import com.alibaba.fastjson.JSONObject;
-import org.springframework.http.HttpRequest;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,4 +12,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface CodeGeneratorService {
     void generatorCode(MultipartFile file,HttpServletResponse response) throws Exception;
+
+    public void downLoadTemplate(String name, HttpServletResponse response)throws Exception ;
 }

@@ -8,7 +8,15 @@
 <form method="post" action="/code" enctype="multipart/form-data">
     <input type="file" name="file">
     <br><br>
+    <select name="module">
+        <option value="BPM">工作流</option>
+        <option value="UDC">低代码</option>
+    </select>
     <input type="submit" value="提交">
+</form>
+
+<form method="post" action="/template" enctype="multipart/form-data">
+    <input type="submit" value="模板下载">
 </form>
 </body>
 </html>
