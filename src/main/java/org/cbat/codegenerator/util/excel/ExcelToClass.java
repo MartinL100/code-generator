@@ -128,7 +128,7 @@ public class ExcelToClass {
         String attrType = getConfig().getString(entity.getDataType().toLowerCase(), StringUtil.columnToJava(entity.getDataType()));
         entity.setAttrType(attrType);
 
-        entity.setColumnName(colData.get("1"));
+        entity.setColumnName(colData.get("0"));
         String lenth = colData.get("3");
         if (StringUtils.isNotBlank(lenth)){
             entity.setLenth(Integer.valueOf(colData.get("3")));
