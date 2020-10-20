@@ -50,7 +50,7 @@ public class ${className}Controller {
 
     @ApiOperation(value = "根据条件查询${comments}" , notes = "根据条件查询${comments}")
     @PostMapping("${class_name}/search")
-    @ApiMapParameter(name = "params", dtoName = "${className}Dto")
+    @ApiMapParameter(name = "params", dtoClass = "${className}Dto")
     public PageResponse<${className}Dto> search(@MultiRequestBody PageInfo pageInfo, @MultiRequestBody Map<String, Object> params, @MultiRequestBody Sort sort){
         return ${classname}AppService.selectPageByConditions(PageRequest.from(pageInfo, params, sort));
     }
