@@ -1,0 +1,201 @@
+package ${package}.${moduleName}.api;
+
+import ${package}.${moduleName}.dto.${className}Dto;
+import ${package}.${moduleName}.domain.dao.${className}Dao;
+import ${package}.${moduleName}.domain.entity.${className};
+
+import com.seeyon.boot.domain.dao.Wrapper;
+import com.seeyon.boot.starter.test.AppTestBase;
+import com.seeyon.boot.transport.PageInfo;
+import com.seeyon.boot.transport.PageRequest;
+import com.seeyon.boot.transport.PageResponse;
+import com.seeyon.boot.transport.SingleRequest;
+import com.seeyon.boot.transport.SingleResponse;
+import com.seeyon.boot.util.JsonUtils;
+import com.seeyon.udc.api.AttributeAppService;
+import com.seeyon.udc.common.AttributeErrorCode;
+import com.seeyon.udc.dto.AttributeDto;
+import com.seeyon.udc.entity.domain.dao.AttributeDao;
+import com.seeyon.udc.entity.domain.entity.Attribute;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@ContextConfiguration(classes = TestApplication.class)
+@Slf4j
+public class  ${className}AppServiceTest  extends AppTestBase {
+
+    private static final String NAME_PREFIX = "test${className}_";
+
+    @Autowired
+    private ${className}AppService appService;
+
+    @Autowired
+    private ${className}Dao ${classname}Dao;
+
+    /**
+     * 记录用到的ID列表
+     */
+    private static List<Long> ${classname}Ids = null;
+
+    @Override
+    public void init() {
+        ${classname}Ids = new ArrayList<>();
+
+        // 先初始化实体属性的，后面增加实体的
+        for (int i = 0; i < 10; i++) {
+            ${className}Dto ${classname}Dto = new ${className}Dto();
+
+            // TODO 设置属性
+
+            SingleResponse<Long> ${classname} = appService.create(SingleRequest.from(${classname}Dto));
+
+            ${classname}Ids.add(${classname}.getData().getContent());
+        }
+    }
+
+    /**
+     *  测试创建
+     * @author ${author}
+     * @date ${datetime}
+     */
+    @Test
+    public void testCreate() {
+
+        SingleResponse<Long> ${classname} = createDto();
+
+        Assert.assertTrue(${classname}.getData().getContent() != null);
+
+        ${classname}Ids.add(${classname}.getData().getContent());
+
+    }
+
+
+    private SingleResponse<Long> createDto() {
+        return appService.create(SingleRequest.from(build${className}Dto()));
+    }
+
+    /**
+     *  构建dto
+     * @author ${author}
+     * @date ${datetime}
+     * @return dto
+     */
+    private ${className}Dto build${className}Dto() {
+        ${className}Dto ${classname}Dto = new ${className}Dto();
+
+        // TODO 设置属性
+
+        return ${classname}Dto;
+    }
+    /**
+     *  测试修改
+     * @author ${author}
+     * @date ${datetime}
+     */
+    @Test
+    public void testUpdate() {
+
+        // 获取一条原始数据
+        ${className}Dto ${classname} = selectById(${classname}Ids.get(0));
+
+        // TODO 更新数据
+
+        SingleResponse<Integer> updateResp = appService.update(SingleRequest.from(${classname}));
+
+        // 校验数据
+        Assert.assertEquals(Integer.valueOf(1), updateResp.getData().getContent());
+        ${className}Dto updated${className} = selectById(${classname}.getId());
+
+        // TODO 校验属性
+
+    }
+    /**
+     *  测试删除（通过主键）
+     * @author ${author}
+     * @date ${datetime}
+     */
+    @Test
+    public void testDeleteById() {
+
+        int index = 5;
+
+        Long id = ${classname}Ids.get(index);
+        SingleResponse<Integer> delResp = appService.deleteById(SingleRequest.from(id));
+        Assert.assertEquals(Integer.valueOf(1), delResp.getData().getContent());
+
+        // 被删除了，校验一下，获取时应该报错
+        SingleResponse<${className}Dto> resp = appService.selectById(SingleRequest.from(id));
+
+        // TODO 校验
+
+        // 移除ID的临时缓存
+        ${classname}Ids.remove(index);
+
+    }
+
+    /**
+     *  测试查询（通过主键）
+     * @author ${author}
+     * @date ${datetime}
+     */
+    @Test
+    public void testSelectById() {
+        ${className}Dto ${classname}Dto = selectById(${classname}Ids.get(0));
+
+        // TODO 校验
+    }
+
+    /**
+     *  测试分页查询
+     * @author ${author}
+     * @date ${datetime}
+     */
+    @Test
+    public void testselectPageByConditions() {
+        PageInfo pageInfo = new PageInfo();
+        pageInfo.setPageSize(5);
+
+        // TODO 查询条件
+        Map<String, Object> map = new HashMap<>();
+
+        PageRequest request = PageRequest.from(pageInfo, map);
+
+        PageResponse<${className}Dto> selResp = appService.selectPageByConditions(request);
+
+        Assert.assertTrue(selResp.getData().getContent() != null);
+
+        Assert.assertTrue(selResp.getData().getContent().size() == 5);
+    }
+
+    private ${className}Dto selectById(Long id) {
+        SingleResponse<${className}Dto> resp = appService.selectById(SingleRequest.from(id));
+        return resp.getData().getContent();
+    }
+
+    @Override
+    public void destroy() {
+        Wrapper wrapper = new Wrapper(${className}.class);
+
+        // TODO 删除条件
+
+        ${classname}Dao.deleteByWrapper(wrapper);
+    }
+}
+

@@ -39,6 +39,7 @@ public class GenCodeUtils {
         templates.add("template/AppService.java.vm");
         templates.add("template/AppServiceImpl.java.vm");
         templates.add("template/Dto.java.vm");
+        templates.add("template/AppServiceTest.java.vm");
         return templates;
     }
 
@@ -149,6 +150,7 @@ public class GenCodeUtils {
      */
     public static String getFileName(String template, String className, String packageName, String moduleName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
+        String testPackagePath = "test" + File.separator + "java" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator + moduleName + File.separator;
         }
@@ -203,6 +205,10 @@ public class GenCodeUtils {
 
         if(template.contains("Dto.java.vm")){
             return packagePath + "dto" + File.separator + className + "Dto.java";
+        }
+
+        if(template.contains("AppServiceTest.java.vm")){
+            return testPackagePath + "appservice" + File.separator + className + "AppServiceTest.java";
         }
 
 

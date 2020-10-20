@@ -37,8 +37,8 @@ public class ${className}AppServiceImpl implements ${className}AppService{
     }
     @Transactional(readOnly = true)
     @Override
-    public PageResponse<${className}Dto> selectPageByCondition(PageRequest request) {
-        return PageResponse.from(${classname}Service.selectPageByCondition(request.getPageInfo(), request.getParams(), request.getSort()));
+    public PageResponse<${className}Dto> selectPageByConditions(PageRequest request) {
+        return PageResponse.from(${classname}Service.selectPageByConditions(request.getPageInfo(), request.getParams(), request.getSort()));
     }
     @Transactional(readOnly = true)
     @Override
