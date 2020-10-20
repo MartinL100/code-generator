@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ${className}AppServiceImpl implements ${className}AppService{
 
     @Autowired
-        ${className}Service ${classname}Service;
+    ${className}Service ${classname}Service;
 
     @Override
     public SingleResponse<Long> create(SingleRequest<${className}Dto> request) {

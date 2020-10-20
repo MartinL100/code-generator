@@ -83,6 +83,8 @@ public class GenCodeUtils {
         map.put("author", config.getString("author"));
         map.put("email", config.getString("email"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
+        map.put("entityUid",tableEntity.getEntityUid());
+        map.put("dtoUid",tableEntity.getDtoUid());
 
         VelocityContext context = new VelocityContext(map);
 

@@ -1,5 +1,7 @@
 package org.cbat.codegenerator.entity;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,13 @@ import java.util.List;
 @Getter
 @Setter
 public class TableEntity {
+
+	public TableEntity() {
+		Snowflake snowflake = IdUtil.getSnowflake(1, 1);
+		this.entityUid = snowflake.nextId();
+		this.dtoUid = snowflake.nextId();
+	}
+
 	//表的名称
 	private String tableName;
 	//表的备注
@@ -25,6 +34,26 @@ public class TableEntity {
 	private String class_name;
 
 	private String dataType;
+
+	private Long entityUid;
+
+	private Long dtoUid;
+
+	public Long getDtoUid() {
+		return dtoUid;
+	}
+
+	public void setDtoUid(Long dtoUid) {
+		this.dtoUid = dtoUid;
+	}
+
+	public Long getEntityUid() {
+		return entityUid;
+	}
+
+	public void setEntityUid(Long entityUid) {
+		this.entityUid = entityUid;
+	}
 
 	public String getDataType() {
 		return dataType;

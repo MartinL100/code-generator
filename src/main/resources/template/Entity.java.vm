@@ -23,17 +23,14 @@ import javax.persistence.Table;
 @Entity
 @Table( name = "${tableName}")
 public class ${className} extends BaseEntity {
-	private static final long serialVersionUID = 1L;
 
-#foreach ($column in $columns)
-	/**
-	 * $column.comments
-	 */
-	##	#if($column.columnName == $pk.columnName)
-	##@TableId
-	##	#end
+	private static final long serialVersionUID = ${entityUid}L;
+	#foreach ($column in $columns)
+		#if($column.columnName != "id" && $column.columnName != "ID")
+
 	@Column(name = "${column.columnName}", columnDefinition = "${column.dataType} COMMENT '${column.comments}'")
 	private $column.attrType $column.attrname;
+		#end
 	#end
 
 }

@@ -20,10 +20,10 @@ import javax.validation.constraints.NotNull;
 @ApiModel(description = "${comments}信息")
 public class ${className}Dto extends BaseDto {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = ${dtoUid}L;
 
 	#foreach ($column in $columns)
-	@ApiModelProperty(value = "$column.comments")
+@ApiModelProperty(value = "$column.comments")
 	private $column.attrType $column.attrname;
 	#end
 
