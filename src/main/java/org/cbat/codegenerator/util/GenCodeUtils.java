@@ -39,6 +39,7 @@ public class GenCodeUtils {
         templates.add("template/AppService.java.vm");
         templates.add("template/AppServiceImpl.java.vm");
         templates.add("template/Dto.java.vm");
+        templates.add("template/AppServiceTest.java.vm");
         return templates;
     }
 
@@ -203,6 +204,10 @@ public class GenCodeUtils {
 
         if(template.contains("Dto.java.vm")){
             return packagePath + "dto" + File.separator + className + "Dto.java";
+        }
+
+        if(template.contains("AppServiceTest.java.vm")){
+            return packagePath + className + "AppServiceTest.java";
         }
 
 
