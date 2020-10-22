@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.dto;
+package ${configDto.packagePath}.${configDto.module.code}.dto;
 
 import com.seeyon.boot.annotation.AppService;
 import com.seeyon.boot.transport.BaseDto;
@@ -10,19 +10,21 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- * ${comments}
+ * ${tableEntity.comments}
  * 
- * @author ${author}
- * @date ${datetime}
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
 @Getter
 @Setter
-@ApiModel(description = "${comments}信息")
-public class ${className}Dto extends BaseDto {
+@ApiModel(description = "${tableEntity.comments}信息")
+public class ${tableEntity.classNameUp}Dto extends BaseDto {
 
-	private static final long serialVersionUID = ${dtoUid}L;
+	private static final long serialVersionUID = ${tableEntity.dtoUid}L;
 
-	#foreach ($column in $columns)
+	#foreach ($column in $tableEntity.columns)
 @ApiModelProperty(value = "$column.comments")
 	private $column.attrType $column.attrname;
 	#end

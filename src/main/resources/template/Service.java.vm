@@ -1,10 +1,10 @@
-package ${package}.${moduleName}.domain.service;
+package ${configDto.packagePath}.${configDto.module.code}.domain.service;
 
 
 
-import ${package}.${moduleName}.domain.entity.${className};
-import ${package}.${moduleName}.domain.dao.${className}Dao;
-import ${package}.${moduleName}.dto.${className}Dto;
+import ${configDto.packagePath}.${configDto.module.code}.domain.entity.${tableEntity.classNameUp};
+import ${configDto.packagePath}.${configDto.module.code}.domain.dao.${tableEntity.classNameUp}Dao;
+import ${configDto.packagePath}.${configDto.module.code}.dto.${tableEntity.classNameUp}Dto;
 
 import com.seeyon.boot.transport.PageData;
 import com.seeyon.boot.transport.PageInfo;
@@ -19,27 +19,29 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 /**
- * ${comments}
+ * ${tableEntity.comments}
  *
- * @author ${author}
- * @date ${datetime}
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
 @Service
 @Slf4j
-public class ${className}Service {
+public class ${tableEntity.classNameUp}Service {
 
     @Autowired
-    ${className}Dao ${classname}Dao;
+    ${tableEntity.classNameUp}Dao ${tableEntity.classNameLow}Dao;
 
     /**
-    * 创建${comments}
+    * 创建${tableEntity.comments}
     * @param dto dto对象
     * @return id
     */
-    public Long create(${className}Dto dto){
-        ${className} entity = new ${className}();
+    public Long create(${tableEntity.classNameUp}Dto dto){
+        ${tableEntity.classNameUp} entity = new ${tableEntity.classNameUp}();
         entity.from(dto);
-        ${classname}Dao.create(entity);
+        ${tableEntity.classNameLow}Dao.create(entity);
         return entity.getId();
     }
 
@@ -48,21 +50,21 @@ public class ${className}Service {
     * @param pageInfo 分页信息
     * @param columnMap 条件集合
     * @param sort 排序方式
-    * @return ${comments}集合
+    * @return ${tableEntity.comments}集合
     */
-    public PageData<${className}Dto> selectPageByConditions(PageInfo pageInfo, Map<String, Object> columnMap, Sort sort){
-        PageData<${className}> pageData = ${classname}Dao.selectPageByConditions(pageInfo, columnMap, sort);
-        return pageData.to(${className}Dto.class);
+    public PageData<${tableEntity.classNameUp}Dto> selectPageByConditions(PageInfo pageInfo, Map<String, Object> columnMap, Sort sort){
+        PageData<${tableEntity.classNameUp}> pageData = ${tableEntity.classNameLow}Dao.selectPageByConditions(pageInfo, columnMap, sort);
+        return pageData.to(${tableEntity.classNameUp}Dto.class);
     }
 
     /**
     * 根据id查询
     * @param id
-    * @return ${comments}
+    * @return ${tableEntity.comments}
     */
-    public ${className}Dto selectById(@NotNull Long id){
-        ${className} entity = ${classname}Dao.selectById(id);
-        return null == entity?null: entity.to(${className}Dto.class);
+    public ${tableEntity.classNameUp}Dto selectById(@NotNull Long id){
+        ${tableEntity.classNameUp} entity = ${tableEntity.classNameLow}Dao.selectById(id);
+        return null == entity?null: entity.to(${tableEntity.classNameUp}Dto.class);
     }
 
     /**
@@ -71,7 +73,7 @@ public class ${className}Service {
     * @return 删除数量
     */
     public Integer deleteById(@NotNull Long id){
-        return ${classname}Dao.deleteById(id);
+        return ${tableEntity.classNameLow}Dao.deleteById(id);
     }
 
     /**
@@ -79,13 +81,13 @@ public class ${className}Service {
     * @param dto
     * @return 修改数量
     */
-    public Integer update(${className}Dto dto){
-        ${className} entity = ${classname}Dao.selectById(dto.getId());
+    public Integer update(${tableEntity.classNameUp}Dto dto){
+        ${tableEntity.classNameUp} entity = ${tableEntity.classNameLow}Dao.selectById(dto.getId());
         if (null == entity){
             return 0;
         }
         entity.from(dto);
-        return ${classname}Dao.update(entity);
+        return ${tableEntity.classNameLow}Dao.update(entity);
     }
 }
 

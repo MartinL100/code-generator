@@ -21,101 +21,24 @@ public class TableEntity {
 	private String tableName;
 	//表的备注
 	private String comments;
-	//表的主键
-	private ColumnEntity pk;
 	//表的列名(不包含主键)
 	private List<ColumnEntity> columns;
 	
 	//类名(第一个字母大写)，如：sys_user => SysUser
-	private String className;
+	private String classNameUp;
 	//类名(第一个字母小写)，如：sys_user => sysUser
-	private String classname;
+	private String classNameLow;
 	//烤串命名  sys_user => sys-user
-	private String class_name;
-
+	private String classNameSkewer;
+	//数据类型
 	private String dataType;
-
+	//对象ID
 	private Long entityUid;
-
+	//DtoID
 	private Long dtoUid;
+	/**是否包含Decimal*/
+	private Boolean hasDecimal = false;
+	/**是否包含List*/
+	private Boolean hasList = false;
 
-	public Long getDtoUid() {
-		return dtoUid;
-	}
-
-	public void setDtoUid(Long dtoUid) {
-		this.dtoUid = dtoUid;
-	}
-
-	public Long getEntityUid() {
-		return entityUid;
-	}
-
-	public void setEntityUid(Long entityUid) {
-		this.entityUid = entityUid;
-	}
-
-	public String getDataType() {
-		return dataType;
-	}
-
-	public void setDataType(String dataType) {
-		this.dataType = dataType;
-	}
-
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public ColumnEntity getPk() {
-		return pk;
-	}
-
-	public void setPk(ColumnEntity pk) {
-		this.pk = pk;
-	}
-
-	public List<ColumnEntity> getColumns() {
-		return columns;
-	}
-
-	public void setColumns(List<ColumnEntity> columns) {
-		this.columns = columns;
-	}
-
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(String className) {
-		this.className = className;
-	}
-
-	public String getClassname() {
-		return classname;
-	}
-
-	public void setClassname(String classname) {
-		this.classname = classname;
-	}
-
-	public String getClass_name() {
-		return class_name;
-	}
-
-	public void setClass_name(String class_name) {
-		this.class_name = class_name;
-	}
 }

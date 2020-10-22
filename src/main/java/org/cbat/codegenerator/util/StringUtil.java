@@ -2,6 +2,9 @@ package org.cbat.codegenerator.util;
 
 import org.apache.commons.lang.WordUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author liucong
  * @version 1.0.0
@@ -65,4 +68,18 @@ public class StringUtil {
         return str.toLowerCase().replace("_","-");
     }
 
+    /**
+     * java实现不区分大小写替换
+     * @param source  源字符串
+     * @param oldString 旧字符串
+     * @param newString 新字符串
+     * @return
+     */
+    public static String IgnoreCaseReplace(String source, String oldString,
+                                           String newString){
+        Pattern p = Pattern.compile(oldString, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(source);
+        String ret = m.replaceAll(newString);
+        return ret;
+    }
 }

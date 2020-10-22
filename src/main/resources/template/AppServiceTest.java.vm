@@ -1,8 +1,8 @@
-package ${package}.${moduleName}.api;
+package ${configDto.packagePath}.${configDto.module.code}.api;
 
-import ${package}.${moduleName}.dto.${className}Dto;
-import ${package}.${moduleName}.domain.dao.${className}Dao;
-import ${package}.${moduleName}.domain.entity.${className};
+import ${configDto.packagePath}.${configDto.module.code}.dto.${tableEntity.classNameUp}Dto;
+import ${configDto.packagePath}.${configDto.module.code}.domain.dao.${tableEntity.classNameUp}Dao;
+import ${configDto.packagePath}.${configDto.module.code}.domain.entity.${tableEntity.classNameUp};
 
 import com.seeyon.boot.domain.dao.Wrapper;
 import com.seeyon.boot.starter.test.AppTestBase;
@@ -32,57 +32,59 @@ import java.util.Map;
 
 
 /**
- * ${comments}
+ * ${tableEntity.comments}
  *
- * @author ${author}
- * @date ${datetime}
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
 @ContextConfiguration(classes = TestApplication.class)
 @Slf4j
-public class  ${className}AppServiceTest  extends AppTestBase {
-
-    private static final String NAME_PREFIX = "test${className}_";
+public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
 
     @Autowired
-    private ${className}AppService appService;
+    private ${tableEntity.classNameUp}AppService appService;
 
     @Autowired
-    private ${className}Dao ${classname}Dao;
+    private ${tableEntity.classNameUp}Dao ${tableEntity.classNameLow}Dao;
 
     /**
      * 记录用到的ID列表
      */
-    private static List<Long> ${classname}Ids = null;
+    private static List<Long> ${tableEntity.classNameLow}Ids = null;
 
     @Override
     public void init() {
-        ${classname}Ids = new ArrayList<>();
+        ${tableEntity.classNameLow}Ids = new ArrayList<>();
 
         // 先初始化实体属性的，后面增加实体的
         for (int i = 0; i < 10; i++) {
-            ${className}Dto ${classname}Dto = new ${className}Dto();
+            ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow}Dto = new ${tableEntity.classNameUp}Dto();
 
             // TODO 设置属性
 
-            SingleResponse<Long> ${classname} = appService.create(SingleRequest.from(${classname}Dto));
+            SingleResponse<Long> ${tableEntity.classNameLow} = appService.create(SingleRequest.from(${tableEntity.classNameLow}Dto));
 
-            ${classname}Ids.add(${classname}.getData().getContent());
+            ${tableEntity.classNameLow}Ids.add(${tableEntity.classNameLow}.getData().getContent());
         }
     }
 
     /**
      *  测试创建
-     * @author ${author}
-     * @date ${datetime}
+    #if($configDto.author != "")
+     * @author ${configDto.author}
+    #end
+     * @date ${configDto.datetime}
      */
     @Test
     public void testCreate() {
 
-        SingleResponse<Long> ${classname} = createDto();
+        SingleResponse<Long> ${tableEntity.classNameLow} = createDto();
 
-        Assert.assertTrue(${classname}.getData().getContent() != null);
+        Assert.assertTrue(${tableEntity.classNameLow}.getData().getContent() != null);
 
-        ${classname}Ids.add(${classname}.getData().getContent());
+        ${tableEntity.classNameLow}Ids.add(${tableEntity.classNameLow}.getData().getContent());
 
     }
 
@@ -93,79 +95,89 @@ public class  ${className}AppServiceTest  extends AppTestBase {
 
     /**
      *  构建dto
-     * @author ${author}
-     * @date ${datetime}
+    #if($configDto.author != "")
+     * @author ${configDto.author}
+    #end
+     * @date ${configDto.datetime}
      * @return dto
      */
-    private ${className}Dto build${className}Dto() {
-        ${className}Dto ${classname}Dto = new ${className}Dto();
+    private ${tableEntity.classNameUp}Dto build${className}Dto() {
+        ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow}Dto = new ${tableEntity.classNameUp}Dto();
 
         // TODO 设置属性
 
-        return ${classname}Dto;
+        return ${tableEntity.classNameLow}Dto;
     }
     /**
      *  测试修改
-     * @author ${author}
-     * @date ${datetime}
+    #if($configDto.author != "")
+     * @author ${configDto.author}
+    #end
+     * @date ${configDto.datetime}
      */
     @Test
     public void testUpdate() {
 
         // 获取一条原始数据
-        ${className}Dto ${classname} = selectById(${classname}Ids.get(0));
+        ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow} = selectById(${tableEntity.classNameLow}Ids.get(0));
 
         // TODO 更新数据
 
-        SingleResponse<Integer> updateResp = appService.update(SingleRequest.from(${classname}));
+        SingleResponse<Integer> updateResp = appService.update(SingleRequest.from(${tableEntity.classNameLow}));
 
         // 校验数据
         Assert.assertEquals(Integer.valueOf(1), updateResp.getData().getContent());
-        ${className}Dto updated${className} = selectById(${classname}.getId());
+        ${tableEntity.classNameUp}Dto updated${className} = selectById(${tableEntity.classNameLow}.getId());
 
         // TODO 校验属性
 
     }
     /**
      *  测试删除（通过主键）
-     * @author ${author}
-     * @date ${datetime}
+    #if($configDto.author != "")
+     * @author ${configDto.author}
+    #end
+     * @date ${configDto.datetime}
      */
     @Test
     public void testDeleteById() {
 
         int index = 5;
 
-        Long id = ${classname}Ids.get(index);
+        Long id = ${tableEntity.classNameLow}Ids.get(index);
         SingleResponse<Integer> delResp = appService.deleteById(SingleRequest.from(id));
         Assert.assertEquals(Integer.valueOf(1), delResp.getData().getContent());
 
         // 被删除了，校验一下，获取时应该报错
-        SingleResponse<${className}Dto> resp = appService.selectById(SingleRequest.from(id));
+        SingleResponse<${tableEntity.classNameUp}Dto> resp = appService.selectById(SingleRequest.from(id));
 
         // TODO 校验
 
         // 移除ID的临时缓存
-        ${classname}Ids.remove(index);
+        ${tableEntity.classNameLow}Ids.remove(index);
 
     }
 
     /**
      *  测试查询（通过主键）
-     * @author ${author}
-     * @date ${datetime}
+    #if($configDto.author != "")
+     * @author ${configDto.author}
+    #end
+     * @date ${configDto.datetime}
      */
     @Test
     public void testSelectById() {
-        ${className}Dto ${classname}Dto = selectById(${classname}Ids.get(0));
+        ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow}Dto = selectById(${tableEntity.classNameLow}Ids.get(0));
 
         // TODO 校验
     }
 
     /**
      *  测试分页查询
-     * @author ${author}
-     * @date ${datetime}
+    #if($configDto.author != "")
+     * @author ${configDto.author}
+    #end
+     * @date ${configDto.datetime}
      */
     @Test
     public void testselectPageByConditions() {
@@ -177,25 +189,25 @@ public class  ${className}AppServiceTest  extends AppTestBase {
 
         PageRequest request = PageRequest.from(pageInfo, map);
 
-        PageResponse<${className}Dto> selResp = appService.selectPageByConditions(request);
+        PageResponse<${tableEntity.classNameUp}Dto> selResp = appService.selectPageByConditions(request);
 
         Assert.assertTrue(selResp.getData().getContent() != null);
 
         Assert.assertTrue(selResp.getData().getContent().size() == 5);
     }
 
-    private ${className}Dto selectById(Long id) {
-        SingleResponse<${className}Dto> resp = appService.selectById(SingleRequest.from(id));
+    private ${tableEntity.classNameUp}Dto selectById(Long id) {
+        SingleResponse<${tableEntity.classNameUp}Dto> resp = appService.selectById(SingleRequest.from(id));
         return resp.getData().getContent();
     }
 
     @Override
     public void destroy() {
-        Wrapper wrapper = new Wrapper(${className}.class);
+        Wrapper wrapper = new Wrapper(${tableEntity.classNameUp}.class);
 
         // TODO 删除条件
 
-        ${classname}Dao.deleteByWrapper(wrapper);
+        ${tableEntity.classNameLow}Dao.deleteByWrapper(wrapper);
     }
 }
 

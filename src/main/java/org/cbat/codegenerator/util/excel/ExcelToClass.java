@@ -15,10 +15,9 @@ import org.cbat.codegenerator.util.GenCodeUtils;
 import org.cbat.codegenerator.util.StringUtil;
 
 
-import java.io.ByteArrayOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,20 +34,12 @@ import java.util.zip.ZipOutputStream;
  */
 public class ExcelToClass {
 
-        private static List<ColumnEntity> cols = new ArrayList<>();
-        private static TableEntity table = new TableEntity();
-        public static void main(String[] args) throws IOException {
-            //控制输出路径
-            FileOutputStream file = new FileOutputStream(getConfig().getString("targetpath"));
-            ZipOutputStream zip = new ZipOutputStream(file);
-            //获取excle文件
-            FileInputStream fis = new FileInputStream(
-                    new File(getConfig().getString("sourcepath")));
-            GenCodeUtils.generatorCode(excelToTableEntity(fis),zip);
-        }
-
+     private static List<ColumnEntity> cols = null;
+     private static TableEntity table = null;
 
     public static TableEntity excelToTableEntity(FileInputStream fis) throws IOException {
+        cols = new ArrayList<>();
+        table = new TableEntity();
         Configuration config = getConfig();
         //获取excle对象 XSSF支持 xlsx
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
@@ -87,10 +78,10 @@ public class ExcelToClass {
                         }
                         if (isTableName){
                             table.setTableName(cell.getStringCellValue());
-                            table.setClassName(StringUtil.columnToJava(table.getTableName()));
-                            table.setClassname(StringUtils.uncapitalize(table.getClassName()));
+                            table.setClassNameUp(StringUtil.columnToJava(table.getTableName()));
+                            table.setClassNameLow(StringUtils.uncapitalize(table.getClassNameUp()));
                             String class_name = StringUtil.converToSkewer(StringUtil.replacePrefix(cell.getStringCellValue(),config.getStringArray("tablePrefix")));
-                            table.setClass_name(class_name);
+                            table.setClassNameSkewer(class_name);
                             isTableName = false;
                             continue;
                         }
@@ -147,7 +138,7 @@ public class ExcelToClass {
         try {
             return new PropertiesConfiguration("generator.properties");
         } catch (ConfigurationException e) {
-            e.printStackTrace();//todo
+            e.printStackTrace();
         }
 
         return null;

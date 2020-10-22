@@ -6,8 +6,8 @@ package org.cbat.codegenerator.enums;
  * @date 2020/10/20 11:06
  */
 public enum  ModuleEnum {
-    BPM("BPM","bpm","工作流","bpm"),
-    UDC("UDC","udc","低代码平台","udc");
+    BPM("Bpm","bpm","工作流","bpm"),
+    UDC("Udc","udc","低代码平台","udc");
     /**前缀大写*/
     private String prefixUp;
     /**前缀小写*/

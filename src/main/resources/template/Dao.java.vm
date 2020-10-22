@@ -1,14 +1,16 @@
-package ${package}.${moduleName}.domian.dao;
+package ${configDto.packagePath}.${configDto.module.code}.domian.dao;
 
-import ${package}.${moduleName}.domain.entity.${className};
+import ${configDto.packagePath}.${configDto.module.code}.domain.entity.${tableEntity.classNameUp};
 import com.seeyon.boot.starter.mybatis.BaseMybatisDao;
 
 /**
- * ${comments}
+ * ${tableEntity.comments}
  * 
- * @author ${author}
- * @date ${datetime}
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
-public interface ${className}Dao extends BaseMybatisDao<${className}> {
+public interface ${tableEntity.classNameUp}Dao extends BaseMybatisDao<${tableEntity.classNameUp}> {
 	
 }

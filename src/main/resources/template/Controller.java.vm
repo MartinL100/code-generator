@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.controller;
+package ${configDto.packagePath}.${configDto.module.code}.controller;
 
 import com.seeyon.boot.annotation.ApiMapParameter;
 import com.seeyon.boot.annotation.MultiRequestBody;
@@ -24,54 +24,57 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 
-import ${package}.${moduleName}.api.${className}AppService;
-import ${package}.${moduleName}.dto.${className}Dto;
+import ${configDto.packagePath}.${configDto.module.code}.api.${tableEntity.classNameUp}AppService;
+import ${configDto.packagePath}.${configDto.module.code}.dto.${tableEntity.classNameUp}Dto;
 
 
 
 /**
- * @date ${datetime}
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
 @RestController
-@RequestMapping("${moduleName}/${class_name}")
-@Api(tags = "${comments}访问接口")
-public class ${className}Controller {
+@RequestMapping("${configDto.module.code}/${tableEntity.classNameSkewer}")
+@Api(tags = "${tableEntity.comments}访问接口")
+public class ${tableEntity.classNameUp}Controller {
 
     @Autowired
-    private ${className}AppService ${classname}AppService;
+    private ${tableEntity.classNameUp}AppService ${tableEntity.classNameLow}AppService;
 
 
-    @ApiOperation(value = "创建${comments}" , notes = "创建${comments}")
-    @PostMapping("${class_name}/create")
-    public SingleResponse<Long> create(@RequestBody ${className}Dto dto){
-        return ${classname}AppService.create(SingleRequest.from(dto));
+    @ApiOperation(value = "创建${tableEntity.comments}" , notes = "创建${tableEntity.comments}")
+    @PostMapping("${tableEntity.classNameSkewer}/create")
+    public SingleResponse<Long> create(@RequestBody ${tableEntity.classNameUp}Dto dto){
+        return ${tableEntity.classNameLow}AppService.create(SingleRequest.from(dto));
     }
 
 
-    @ApiOperation(value = "根据条件查询${comments}" , notes = "根据条件查询${comments}")
-    @PostMapping("${class_name}/search")
-    @ApiMapParameter(name = "params", dtoClass = "${className}Dto")
-    public PageResponse<${className}Dto> search(@MultiRequestBody PageInfo pageInfo, @MultiRequestBody Map<String, Object> params, @MultiRequestBody Sort sort){
-        return ${classname}AppService.selectPageByConditions(PageRequest.from(pageInfo, params, sort));
+    @ApiOperation(value = "根据条件查询${tableEntity.comments}" , notes = "根据条件查询${tableEntity.comments}")
+    @PostMapping("${tableEntity.classNameSkewer}/search")
+    @ApiMapParameter(name = "params", dtoClass = "${tableEntity.classNameUp}Dto")
+    public PageResponse<${tableEntity.classNameUp}Dto> search(@MultiRequestBody PageInfo pageInfo, @MultiRequestBody Map<String, Object> params, @MultiRequestBody Sort sort){
+        return ${tableEntity.classNameLow}AppService.selectPageByConditions(PageRequest.from(pageInfo, params, sort));
     }
 
 
-    @ApiOperation(value = "获取${comments}详情")
-    @GetMapping("${class_name}/{id}")
-    public SingleResponse<${className}Dto> selectById(@PathVariable("id") @ApiParam(value = "${comments}id") Long id) {
-        return ${classname}AppService.selectById(SingleRequest.from(id));
+    @ApiOperation(value = "获取${tableEntity.comments}详情")
+    @GetMapping("${tableEntity.classNameSkewer}/{id}")
+    public SingleResponse<${tableEntity.classNameUp}Dto> selectById(@PathVariable("id") @ApiParam(value = "${tableEntity.comments}id") Long id) {
+        return ${tableEntity.classNameLow}AppService.selectById(SingleRequest.from(id));
     }
 
-    @ApiOperation(value = "根据id删除${comments}")
-    @PostMapping ("${class_name}/delete")
-    public SingleResponse<Integer>deleteById(@ApiParam(value = "${comments}id") @MultiRequestBody @NotNull Long id){
-        return ${classname}AppService.deleteById(SingleRequest.from(id));
+    @ApiOperation(value = "根据id删除${tableEntity.comments}")
+    @PostMapping ("${tableEntity.classNameSkewer}/delete")
+    public SingleResponse<Integer>deleteById(@ApiParam(value = "${tableEntity.comments}id") @MultiRequestBody @NotNull Long id){
+        return ${tableEntity.classNameLow}AppService.deleteById(SingleRequest.from(id));
     }
 
-    @ApiOperation(value = "修改${comments}" , notes = "修改${comments}")
-    @PostMapping("${class_name}/update")
-    public SingleResponse<Integer> update(@RequestBody ${className}Dto dto){
-        return ${classname}AppService.update(SingleRequest.from(dto));
+    @ApiOperation(value = "修改${tableEntity.comments}" , notes = "修改${tableEntity.comments}")
+    @PostMapping("${tableEntity.classNameSkewer}/update")
+    public SingleResponse<Integer> update(@RequestBody ${tableEntity.classNameUp}Dto dto){
+        return ${tableEntity.classNameLow}AppService.update(SingleRequest.from(dto));
     }
 
 

@@ -1,6 +1,8 @@
 package org.cbat.codegenerator.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import org.cbat.codegenerator.dto.ConfigDto;
+import org.cbat.codegenerator.entity.TableEntity;
 import org.cbat.codegenerator.service.CodeGeneratorService;
 import org.cbat.codegenerator.util.GenCodeUtils;
 import org.cbat.codegenerator.util.excel.ExcelToClass;
@@ -13,7 +15,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.ZipOutputStream;
 
@@ -24,14 +25,38 @@ import java.util.zip.ZipOutputStream;
  */
 @Service
 public class CodeGeneratorServiceImpl implements CodeGeneratorService {
-
-    public void generatorCode(MultipartFile file, HttpServletResponse response) throws Exception {
+    /**
+     * 代码生成
+     * @param file 模板文件
+     * @throws Exception
+     */
+    public String upLoadTemplate(MultipartFile file, ConfigDto configDto) throws Exception {
         if (file == null || file.isEmpty()) {
             throw new Exception("未选择需上传的日志文件");
         }
-        FileInputStream inputStream = (FileInputStream) file.getInputStream();
-        ZipOutputStream zip = new ZipOutputStream(response.getOutputStream());
-        GenCodeUtils.generatorCode(ExcelToClass.excelToTableEntity(inputStream),zip);
+        String fileName = System.currentTimeMillis()+".zip";
+        String path = ResourceUtils.getURL("classpath:").getPath()+File.separator+fileName;
+        File fileTemp = new File(path);
+        FileOutputStream outputStream  = new FileOutputStream(fileTemp);
+        ZipOutputStream zip = new ZipOutputStream(outputStream);
+        TableEntity tableEntity = ExcelToClass.excelToTableEntity((FileInputStream) file.getInputStream());
+
+        dealConfig(tableEntity,configDto);
+
+        GenCodeUtils.generatorCode(tableEntity,zip,configDto);
+        return fileName;
+    }
+
+    /**
+     * 处理配置信息
+     * @param tableEntity
+     * @param configDto
+     */
+    private void dealConfig(TableEntity tableEntity, ConfigDto configDto) {
+        if (!configDto.getClassHasPrefix()){
+            tableEntity.setClassNameLow(GenCodeUtils.cleanPrefix(tableEntity.getClassNameLow(),configDto.getModule()));
+            tableEntity.setClassNameUp(GenCodeUtils.cleanPrefix(tableEntity.getClassNameUp(),configDto.getModule()));
+        }
     }
 
     public void downLoadTemplate(String name, HttpServletResponse response) throws Exception {

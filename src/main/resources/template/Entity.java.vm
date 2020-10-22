@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.domain.entity;
+package ${configDto.packagePath}.${configDto.module.code}.domain.entity;
 
 import com.seeyon.boot.domain.entity.BaseEntity;
 
@@ -13,19 +13,21 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * ${comments}
- * 
- * @author ${author}
- * @date ${datetime}
+ * ${tableEntity.comments}
+ *
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
 @Getter
 @Setter
 @Entity
 @Table( name = "${tableName}")
-public class ${className} extends BaseEntity {
+public class ${tableEntity.classNameUp} extends BaseEntity {
 
-	private static final long serialVersionUID = ${entityUid}L;
-	#foreach ($column in $columns)
+	private static final long serialVersionUID = ${tableEntity.entityUid}L;
+	#foreach ($column in $tableEntity.columns)
 		#if($column.columnName != "id" && $column.columnName != "ID")
 
 	@Column(name = "${column.columnName}", columnDefinition = "${column.dataType} COMMENT '${column.comments}'")

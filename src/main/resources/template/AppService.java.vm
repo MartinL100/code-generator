@@ -1,6 +1,6 @@
-package ${package}.${moduleName}.api;
+package ${configDto.packagePath}.${configDto.module.code}.api;
 
-import ${package}.${moduleName}.dto.${className}Dto;
+import ${configDto.packagePath}.${configDto.module.code}.dto.${tableEntity.classNameUp}Dto;
 
 import com.seeyon.boot.transport.PageRequest;
 import com.seeyon.boot.transport.PageResponse;
@@ -10,46 +10,48 @@ import com.seeyon.boot.transport.SingleResponse;
 
 
 /**
- * ${comments}
+ * ${tableEntity.comments}
  *
- * @author ${author}
- * @date ${datetime}
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
-public interface ${className}AppService {
+public interface ${tableEntity.classNameUp}AppService {
 
     /**
-     * 创建${comments}
-     * @param request ${comments}
-     * @return ${comments}Id
+     * 创建${tableEntity.comments}
+     * @param request ${tableEntity.comments}
+     * @return ${tableEntity.comments}Id
      */
-    SingleResponse<Long> create(SingleRequest<${className}Dto> request);
+    SingleResponse<Long> create(SingleRequest<${tableEntity.classNameUp}Dto> request);
 
     /**
-     * 分页查询${comments}
-     * @param request 参考${comments}Dto
-     * @return ${comments}Dto集合
+     * 分页查询${tableEntity.comments}
+     * @param request 参考${tableEntity.comments}Dto
+     * @return ${tableEntity.comments}Dto集合
      */
-    PageResponse<${className}Dto> selectPageByConditions(PageRequest request);
+    PageResponse<${tableEntity.classNameUp}Dto> selectPageByConditions(PageRequest request);
 
     /**
-     * 根据ID查询${comments}
-     * @param request ${comments}id
-     * @return ${comments}Dto
+     * 根据ID查询${tableEntity.comments}
+     * @param request ${tableEntity.comments}id
+     * @return ${tableEntity.comments}Dto
      */
-    SingleResponse<${className}Dto>selectById(SingleRequest<Long> request);
+    SingleResponse<${tableEntity.classNameUp}Dto>selectById(SingleRequest<Long> request);
 
     /**
-     * 根据id删除${comments}
-     * @param request ${comments}id
+     * 根据id删除${tableEntity.comments}
+     * @param request ${tableEntity.comments}id
      * @return 删除数量
      */
     SingleResponse<Integer>deleteById(SingleRequest<Long> request);
 
     /**
-     * 修改${comments}
-     * @param request ${comments}Dto
+     * 修改${tableEntity.comments}
+     * @param request ${tableEntity.comments}Dto
      * @return 修改数量
      */
-    SingleResponse<Integer>update(SingleRequest<${className}Dto> request);
+    SingleResponse<Integer>update(SingleRequest<${tableEntity.classNameUp}Dto> request);
 }
 

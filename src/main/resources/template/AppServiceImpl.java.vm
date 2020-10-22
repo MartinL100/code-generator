@@ -1,13 +1,13 @@
-package ${package}.${moduleName}.appservice;
+package ${configDto.package}.${configDto.module.code}.appservice;
 
 import com.seeyon.boot.annotation.AppService;
 import com.seeyon.boot.transport.PageRequest;
 import com.seeyon.boot.transport.PageResponse;
 import com.seeyon.boot.transport.SingleRequest;
 import com.seeyon.boot.transport.SingleResponse;
-import com.seeyon.${moduleName}.api.${className}AppService;
-import com.seeyon.${moduleName}.domain.service.${className}Service;
-import com.seeyon.${moduleName}.dto.${className}Dto;
+import com.seeyon.${configDto.module.code}.api.${tableEntity.classNameUp}AppService;
+import com.seeyon.${configDto.module.code}.domain.service.${tableEntity.classNameUp}Service;
+import com.seeyon.${configDto.module.code}.dto.${tableEntity.classNameUp}Dto;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -16,44 +16,46 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- * ${comments}
+ * ${tableEntity.comments}
  *
- * @author ${author}
- * @date ${datetime}
+#if($configDto.author != "")
+ * @author ${configDto.author}
+#end
+ * @date ${configDto.datetime}
  */
 @AppService
 @Transactional
 @Slf4j
 @DubboService
-@Api(tags = "${comments}对外接口")
-public class ${className}AppServiceImpl implements ${className}AppService{
+@Api(tags = "${tableEntity.comments}对外接口")
+public class ${tableEntity.classNameUp}AppServiceImpl implements ${tableEntity.classNameUp}AppService{
 
     @Autowired
-    ${className}Service ${classname}Service;
+    ${tableEntity.classNameUp}Service ${tableEntity.classNameLow}Service;
 
     @Override
-    public SingleResponse<Long> create(SingleRequest<${className}Dto> request) {
-        return SingleResponse.from(${classname}Service.create(request.getData()));
+    public SingleResponse<Long> create(SingleRequest<${tableEntity.classNameUp}Dto> request) {
+        return SingleResponse.from(${tableEntity.classNameLow}Service.create(request.getData()));
     }
     @Transactional(readOnly = true)
     @Override
-    public PageResponse<${className}Dto> selectPageByConditions(PageRequest request) {
-        return PageResponse.from(${classname}Service.selectPageByConditions(request.getPageInfo(), request.getParams(), request.getSort()));
+    public PageResponse<${tableEntity.classNameUp}Dto> selectPageByConditions(PageRequest request) {
+        return PageResponse.from(${tableEntity.classNameLow}Service.selectPageByConditions(request.getPageInfo(), request.getParams(), request.getSort()));
     }
     @Transactional(readOnly = true)
     @Override
-    public SingleResponse<${className}Dto> selectById(SingleRequest<Long> request) {
-        return SingleResponse.from(${classname}Service.selectById(request.getData()));
+    public SingleResponse<${tableEntity.classNameUp}Dto> selectById(SingleRequest<Long> request) {
+        return SingleResponse.from(${tableEntity.classNameLow}Service.selectById(request.getData()));
     }
     @Override
     public SingleResponse<Integer> deleteById(SingleRequest<Long> request) {
-        return SingleResponse.from(${classname}Service.deleteById(request.getData()));
+        return SingleResponse.from(${tableEntity.classNameLow}Service.deleteById(request.getData()));
     }
 
     @AppService.ValidationGroup(value = AppService.ValidationGroup.Update.class)
     @Override
-    public SingleResponse<Integer> update(SingleRequest<${className}Dto> request) {
-        return SingleResponse.from(${classname}Service.update(request.getData()));
+    public SingleResponse<Integer> update(SingleRequest<${tableEntity.classNameUp}Dto> request) {
+        return SingleResponse.from(${tableEntity.classNameLow}Service.update(request.getData()));
     }
 
 }

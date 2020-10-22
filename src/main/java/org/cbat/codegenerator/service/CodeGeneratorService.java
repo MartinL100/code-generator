@@ -1,6 +1,7 @@
 package org.cbat.codegenerator.service;
 
 
+import org.cbat.codegenerator.dto.ConfigDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2020/10/20 10:18
  */
 public interface CodeGeneratorService {
-    void generatorCode(MultipartFile file,HttpServletResponse response) throws Exception;
+    String upLoadTemplate(MultipartFile file, ConfigDto dto) throws Exception;
 
-    public void downLoadTemplate(String name, HttpServletResponse response)throws Exception ;
+    void downLoadTemplate(String name, HttpServletResponse response)throws Exception ;
 }
