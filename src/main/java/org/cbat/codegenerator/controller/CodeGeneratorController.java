@@ -3,6 +3,7 @@ package org.cbat.codegenerator.controller;
 import org.cbat.codegenerator.dto.ConfigDto;
 import org.cbat.codegenerator.service.CodeGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 
 /**
  * @author liucong
@@ -39,7 +41,11 @@ public class CodeGeneratorController {
      */
     @RequestMapping("/template")
     public void downLoadTemplate(HttpServletResponse response) throws Exception {
-        generatorService.downLoadTemplate("static/template.xlsx", response);
+        String name = "/static/template.xlsx";
+        ClassPathResource classPathResource = new ClassPathResource(name);
+        response.setContentType("application/force-download");
+        response.addHeader("Content-Disposition", "attachment;fileName=" + name);
+        generatorService.downLoadTemplate(classPathResource.getInputStream(), response);
     }
 
     /**
@@ -51,8 +57,11 @@ public class CodeGeneratorController {
      */
     @RequestMapping("/downLoadCode")
     public void downLoadCode(String fileName,HttpServletResponse response) throws Exception {
-        generatorService.downLoadTemplate(fileName, response);
-        File file = new File(ResourceUtils.getURL("classpath:").getPath()+fileName);
+        String path = System.getProperty("user.dir")+File.separator+"temp"+File.separator+fileName;
+        File file = new File(path);
+        response.setContentType("application/force-download");
+        response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
+        generatorService.downLoadTemplate(new FileInputStream(file), response);
         file.delete();
     }
 }

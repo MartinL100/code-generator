@@ -5,6 +5,7 @@ import org.cbat.codegenerator.dto.ConfigDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 
 /**
  * @author liucong
@@ -14,5 +15,5 @@ import javax.servlet.http.HttpServletResponse;
 public interface CodeGeneratorService {
     String upLoadTemplate(MultipartFile file, ConfigDto dto) throws Exception;
 
-    void downLoadTemplate(String name, HttpServletResponse response)throws Exception ;
+    void downLoadTemplate(InputStream inputStream, HttpServletResponse response)throws Exception ;
 }
