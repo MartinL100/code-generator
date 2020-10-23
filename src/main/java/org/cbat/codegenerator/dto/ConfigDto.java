@@ -17,16 +17,14 @@ import java.util.Date;
 public class ConfigDto {
     /**模块名称*/
     private ModuleEnum module;
-    /**类名是否带前缀*/
-    private Boolean classHasPrefix;
+    /**类名是否带模块前缀*/
+    private Boolean classHasPrefix = Boolean.TRUE;
     /**主路径*/
     private String mainPath = "com.seeyon";
     /**包路径*/
     private String packagePath = "com.seeyon";
     /**作者*/
     private String author = "";
-    /**是否需要填写作者*/
-    private Boolean needAuthor;
     /**创建时间*/
     private String datetime = DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN);
 

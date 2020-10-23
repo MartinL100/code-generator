@@ -38,12 +38,17 @@ public class CodeGeneratorServiceImpl implements CodeGeneratorService {
         String path = ResourceUtils.getURL("classpath:").getPath()+File.separator+fileName;
         File fileTemp = new File(path);
         FileOutputStream outputStream  = new FileOutputStream(fileTemp);
-        ZipOutputStream zip = new ZipOutputStream(outputStream);
-        TableEntity tableEntity = ExcelToClass.excelToTableEntity((FileInputStream) file.getInputStream());
+        try {
+            ZipOutputStream zip = new ZipOutputStream(outputStream);
+            TableEntity tableEntity = ExcelToClass.excelToTableEntity((FileInputStream) file.getInputStream());
 
-        dealConfig(tableEntity,configDto);
+            dealConfig(tableEntity,configDto);
 
-        GenCodeUtils.generatorCode(tableEntity,zip,configDto);
+            GenCodeUtils.generatorCode(tableEntity,zip,configDto);
+        } finally {
+//            outputStream.close();
+        }
+
         return fileName;
     }
 

@@ -48,21 +48,26 @@ public class GenCodeUtils {
 
         //获取模板列表
         List<String> templates = TemplatesHandler.getTemplates();
-        for (String template : templates) {
-            //渲染模板
-            StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, "UTF-8");
-            tpl.merge(context, sw);
-
+        try {
+            for (String template : templates) {
+                //渲染模板
+                StringWriter sw = new StringWriter();
+                Template tpl = Velocity.getTemplate(template, "UTF-8");
+                tpl.merge(context, sw);
+                    //添加到zip
+                    String name = TemplatesHandler.getFileName(template, tableEntity,configDto);
+                    zip.putNextEntry(new ZipEntry(name));
+                    IOUtils.write(sw.toString(), zip, "UTF-8");
+                    IOUtils.closeQuietly(sw);
+                    zip.closeEntry();
+            }
+        } catch (IOException e) {
+           e.printStackTrace();
+        }finally {
             try {
-                //添加到zip
-                String name = TemplatesHandler.getFileName(template, tableEntity,configDto);
-                zip.putNextEntry(new ZipEntry(name));
-                IOUtils.write(sw.toString(), zip, "UTF-8");
-                IOUtils.closeQuietly(sw);
-                zip.closeEntry();
-            } catch (IOException e) {
-               e.printStackTrace();
+                zip.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }

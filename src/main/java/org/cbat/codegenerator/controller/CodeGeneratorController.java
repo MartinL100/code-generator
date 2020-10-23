@@ -32,13 +32,27 @@ public class CodeGeneratorController {
         return null;
     }
 
+    /**
+     * 下载模板
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping("/template")
     public void downLoadTemplate(HttpServletResponse response) throws Exception {
         generatorService.downLoadTemplate("static/template.xlsx", response);
     }
+
+    /**
+     * 下载生成代码。下载后删除
+     *
+     * @param fileName
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping("/downLoadCode")
     public void downLoadCode(String fileName,HttpServletResponse response) throws Exception {
         generatorService.downLoadTemplate(fileName, response);
-
+        File file = new File(ResourceUtils.getURL("classpath:").getPath()+fileName);
+        file.delete();
     }
 }
