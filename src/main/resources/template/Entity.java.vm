@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table( name = "${tableName}")
+@Table( name = "${tableEntity.tableName}")
 public class ${tableEntity.classNameUp} extends BaseEntity {
 
 	private static final long serialVersionUID = ${tableEntity.entityUid}L;
