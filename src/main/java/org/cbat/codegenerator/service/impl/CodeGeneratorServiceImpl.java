@@ -2,6 +2,7 @@ package org.cbat.codegenerator.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.cbat.codegenerator.dto.ConfigDto;
 import org.cbat.codegenerator.entity.TableEntity;
 import org.cbat.codegenerator.service.CodeGeneratorService;
@@ -71,7 +72,7 @@ public class CodeGeneratorServiceImpl implements CodeGeneratorService {
      */
     private void dealConfig(TableEntity tableEntity, ConfigDto configDto) {
         if (!configDto.getClassHasPrefix()){
-            tableEntity.setClassNameLow(GenCodeUtils.cleanPrefix(tableEntity.getClassNameLow(),configDto.getModule()));
+            tableEntity.setClassNameLow(StringUtils.uncapitalize(GenCodeUtils.cleanPrefix(tableEntity.getClassNameLow(),configDto.getModule())));
             tableEntity.setClassNameUp(GenCodeUtils.cleanPrefix(tableEntity.getClassNameUp(),configDto.getModule()));
         }
     }
