@@ -1,4 +1,4 @@
-package ${configDto.package}.${configDto.module.code}.appservice;
+package ${configDto.packagePath}.${configDto.module.code}.appservice;
 
 import com.seeyon.boot.annotation.AppService;
 import com.seeyon.boot.transport.PageRequest;
