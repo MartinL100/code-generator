@@ -90,7 +90,7 @@ public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
 
 
     private SingleResponse<Long> createDto() {
-        return appService.create(SingleRequest.from(build${className}Dto()));
+        return appService.create(SingleRequest.from(build${tableEntity.classNameUp}Dto()));
     }
 
     /**
@@ -101,7 +101,7 @@ public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
      * @date ${configDto.datetime}
      * @return dto
      */
-    private ${tableEntity.classNameUp}Dto build${className}Dto() {
+    private ${tableEntity.classNameUp}Dto build${tableEntity.classNameUp}Dto() {
         ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow}Dto = new ${tableEntity.classNameUp}Dto();
 
         // TODO 设置属性
@@ -127,7 +127,7 @@ public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
 
         // 校验数据
         Assert.assertEquals(Integer.valueOf(1), updateResp.getData().getContent());
-        ${tableEntity.classNameUp}Dto updated${className} = selectById(${tableEntity.classNameLow}.getId());
+        ${tableEntity.classNameUp}Dto updated${tableEntity.classNameUp} = selectById(${tableEntity.classNameLow}.getId());
 
         // TODO 校验属性
 
