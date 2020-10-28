@@ -58,7 +58,7 @@ public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
     public void init() {
         ${tableEntity.classNameLow}Ids = new ArrayList<>();
 
-        // 先初始化实体属性的，后面增加实体的
+        // 预置数据
         for (int i = 0; i < 10; i++) {
             ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow}Dto = new ${tableEntity.classNameUp}Dto();
 
@@ -157,6 +157,23 @@ public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
         ${tableEntity.classNameLow}Ids.remove(index);
 
     }
+    /**
+     *  测试删除（不存在的数据）
+        #if($configDto.author != "")
+     * @author ${configDto.author}
+        #end
+     * @date ${configDto.datetime}
+     */
+    @Test
+    public void testDeleteById2() {
+
+        // 刪除不存在的数据
+        Long id = 999L;
+        SingleResponse<Integer> delResp = appService.deleteById(SingleRequest.from(id));
+        Assert.assertEquals(Integer.valueOf(0), delResp.getData().getContent());
+
+    }
+
 
     /**
      *  测试查询（通过主键）
@@ -169,7 +186,24 @@ public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
     public void testSelectById() {
         ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow}Dto = selectById(${tableEntity.classNameLow}Ids.get(0));
 
-        // TODO 校验
+        // 校验
+        Assert.assertNotNull(${tableEntity.classNameLow}Dto);
+    }
+
+    /**
+     *  测试查询（查询不存在的数据）
+        #if($configDto.author != "")
+     * @author ${configDto.author}
+        #end
+     * @date ${configDto.datetime}
+     */
+    @Test
+    public void testSelectById2() {
+        Long id = 999L;
+        ${tableEntity.classNameUp}Dto ${tableEntity.classNameLow}Dto = selectById(id);
+
+        // 校验
+        Assert.assertNull(${tableEntity.classNameLow}Dto);
     }
 
     /**
@@ -180,7 +214,7 @@ public class  ${tableEntity.classNameUp}AppServiceTest  extends AppTestBase {
      * @date ${configDto.datetime}
      */
     @Test
-    public void testselectPageByConditions() {
+    public void testSelectPageByConditions() {
         PageInfo pageInfo = new PageInfo();
         pageInfo.setPageSize(5);
 
